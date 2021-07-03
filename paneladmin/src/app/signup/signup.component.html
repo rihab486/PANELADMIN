@@ -1,0 +1,35 @@
+<div class="container my-3">
+    <img
+    id="profile-img"
+    src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" style="width: 0min; height: 60px;"
+    class="profile-img-card"
+        />
+    <form *ngIf="!isSignedIn" [formGroup]="loginForm" (ngSubmit)="onSignup(emailSignup.value,passwordSignup.value)">
+      <div class="form-group">
+        <label for="exampleInputUsername">Username</label>
+        <input type="text" class="form-control" id="exampleInputUsername" formControlName="Username" aria-describedby="UsernameHelp" #Username>
+        <div *ngIf="loginForm.controls['Username'].touched && loginForm.controls['Username'].invalid">
+            <small *ngIf="loginForm.controls['Username'].errors?.required" class="text-danger">Username is required<br></small>
+        </div>
+    </div> 
+      
+      <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" formControlName="email" aria-describedby="emailHelp" #emailSignup>
+            <div *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].invalid">
+                <small *ngIf="loginForm.controls['email'].errors?.required" class="text-danger">Email is required<br></small>
+                <small *ngIf="loginForm.controls['email'].errors?.email" class="text-danger">Invalid Email<br></small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password" #passwordSignup>
+            <div *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid">
+                <small *ngIf="loginForm.controls['password'].errors?.required" class="text-danger">Password is required<br></small>
+                <small *ngIf="loginForm.controls['password'].errors?.minlength" class="text-danger">password must contain 6 characters at least</small>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="loginForm.pristine || loginForm.invalid">Sign up</button>
+    </form>
+  </div>
+

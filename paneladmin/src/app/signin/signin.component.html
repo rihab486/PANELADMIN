@@ -1,0 +1,38 @@
+<div class="container my-3">
+    <form *ngIf="!isSignedIn" [formGroup]="loginForm" (ngSubmit)="onSignin(email.value,password.value)">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" formControlName="email" aria-describedby="emailHelp" #email>
+            <div *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].invalid">
+                <small *ngIf="loginForm.controls['email'].errors?.required" class="text-danger">Email is required<br></small>
+                <small *ngIf="loginForm.controls['email'].errors?.email" class="text-danger">Invalid Email<br></small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password" #password>
+            <div *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid">
+                <small *ngIf="loginForm.controls['password'].errors?.required" class="text-danger">Password is required<br></small>
+                <small *ngIf="loginForm.controls['password'].errors?.minlength" class="text-danger">password must contain 6 characters at least</small>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" >Sign up</button>
+        <div>Looking to  <a  [routerLink]="['/signup']" >create an account ?</a> </div>
+  
+        <div *ngIf="!isSignedIn" >Login with Google
+          <a (click)="GoogleAuths()"  style="width: 50%; margin-top: 10px;padding: 12px;">
+            <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+            <button type="submit" class="btn btn-primary">LoginGoogle</button> 
+          </a>
+        
+          </div>
+      </form>
+  </div>
+  <app-home *ngIf="isSignedIn" (isLogout)="handleLogout()"></app-home>
+
+  
+  
+  
+  
+  
+  
